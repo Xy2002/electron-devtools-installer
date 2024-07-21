@@ -1,12 +1,6 @@
 Electron DevTools Installer
 ---------------------------
 
-![CircleCI](https://img.shields.io/circleci/build/github/xupea/electron-devtools-installer?style=for-the-badge)
-[![npm](https://img.shields.io/npm/v/electron-devtools-assembler?style=for-the-badge)](https://www.npmjs.com/package/electron-devtools-assembler)
-![npm](https://img.shields.io/npm/dt/electron-devtools-assembler?style=for-the-badge)
-[![license](https://img.shields.io/github/license/xupea/electron-devtools-installer.svg?maxAge=2592000&style=for-the-badge)](https://github.com/xupea/electron-devtools-installer/blob/master/LICENSE)
-[![CFA Enabled](https://img.shields.io/badge/CFA-Enabled-success?style=for-the-badge)](https://github.com/continuousauth)
-
 This is an easy way to install DevTool extensions into Electron.  You shouldn't
 have to mess around with downloading the extension, finding the right folder and
 then configuring the path for everyone's machines.
@@ -19,6 +13,8 @@ then configuring the path for everyone's machines.
 
 3. Electron has limited support for Chrome extension(eg. chrome.scripting)
 
+4. Support downloading extensions through a proxy
+
 This repo uses the fixed version for each extension instead of downloading them from the Chrome Store for two reasons:
 
 - The Chrome Store version may not work
@@ -28,21 +24,25 @@ This repo uses the fixed version for each extension instead of downloading them 
 ## Install
 
 ```
-npm install electron-devtools-assembler --save-dev
+npm install @xy2002/electron-devtools-installer --save-dev
 ```
 or
 ```
-yarn add electron-devtools-assembler -D
+yarn add @xy2002/electron-devtools-installer -D
+```
+or
+```
+pnpm add -D @xy2002/electron-devtools-installer
 ```
 
 ## Usage
 All you have to do now is this in the **main** process of your application.
 
 ```js
-import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-assembler';
+import installExtension, { REDUX_DEVTOOLS } from '@xy2002/electron-devtools-installer';
 // Or if you can not use ES6 imports
 /**
-const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-assembler');
+const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('@xy2002/electron-devtools-installer');
 */
 const { app } = require('electron');
 
@@ -68,7 +68,7 @@ import installExtension, {
   ANGULAR_DEVTOOLS, VUEJS_DEVTOOLS,
   REDUX_DEVTOOLS, MOBX_DEVTOOLS, 
   APOLLO_DEVELOPER_TOOLS,
-} from 'electron-devtools-assembler';
+} from '@xy2002/electron-devtools-installer';
 ```
 
 ## How does it work?
@@ -121,7 +121,7 @@ License
 
 The MIT License (MIT)
 
-Copyright (c) 2023 Peter Xu
+Copyright (c) 2024 Marshall
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in

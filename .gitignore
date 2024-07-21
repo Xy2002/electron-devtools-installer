@@ -2,3 +2,4 @@ node_modules
 dist
 xunit.xml
 yarn-error.log
+*.tgz

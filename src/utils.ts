@@ -1,4 +1,6 @@
-import { app, net } from 'electron';
+import { app } from 'electron';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
 import * as fs from 'fs';
 import * as path from 'path';
 import * as https from 'https';
@@ -8,12 +10,15 @@ export const getPath = () => {
   return path.resolve(`${savePath}/extensions`);
 };
 
-// Use https.get fallback for Electron < 1.4.5
-const request: typeof https.request = net ? (net.request as any) : https.get;
+const request = https.get;
 
-export const downloadFile = (from: string, to: string) => {
+export const downloadFile = (from: string, to: string, agent?: HttpsProxyAgent<string>) => {
   return new Promise<void>((resolve, reject) => {
-    const req = request(from);
+    const req = agent
+      ? request(from, {
+        agent,
+      })
+      : request(from);
     req.on('response', (res) => {
       // Shouldn't handle redirect with `electron.net`, this is for https.get fallback
       if (res.statusCode && res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
