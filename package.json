@@ -1,6 +1,6 @@
 {
   "name": "@xy2002/electron-devtools-installer",
-  "version": "0.0.1-development",
+  "version": "0.1.0-development",
   "description": "An easy way to install Dev Tools extensions into Electron applications",
   "main": "dist/index.js",
   "scripts": {
